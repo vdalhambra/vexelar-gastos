@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#050813">
+<title>Gastos Vexelar</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Gastos Vexelar">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Inter:wght@700&display=swap">
+<style>
+:root{
+  --ink:#050813; --ink-2:#0b1324; --ink-3:#121c33;
+  --blue:#0570f9; --blue-d:#0457c7; --blue-glow:#3d8dff;
+  --sky:#cfe2ff; --ice:#eef5ff; --white:#fff;
+  --muted-ink:#5b6577; --muted-light:rgba(255,255,255,.62);
+  --line-dark:rgba(255,255,255,.12); --line-light:#e3e8f1;
+  --ok:#16a34a; --warn:#f59e0b; --bad:#e5484d;
+  --c-retell:#0570f9; --c-twilio:#ff6b6b; --c-or:#a78bfa; --c-meta:#25d366;
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --gut:clamp(16px,3vw,40px);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:#fff;font-family:var(--f-body);line-height:1.45;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* cabecera */
+header{position:sticky;top:0;z-index:20;background:rgba(5,8,19,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-dark)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.brand b{font-family:"Inter",var(--f-body);font-weight:700;letter-spacing:.14em;font-size:15px}
+.brand span{color:var(--muted-light)}
+.live{display:flex;align-items:center;gap:8px;color:var(--muted-light);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(22,163,74,.6);animation:pulse 2s infinite}
+.dot.viejo{background:var(--warn);animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+.btn{font:600 13px var(--f-body);color:#fff;background:transparent;border:1px solid var(--line-dark);border-radius:999px;padding:8px 14px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--blue-glow);color:var(--sky)}
+
+/* hero */
+.hero{position:relative;padding:clamp(40px,7vw,88px) 0 clamp(36px,5vw,64px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:70vw;height:70vw;max-width:900px;max-height:900px;background:radial-gradient(closest-side,rgba(5,112,249,.35),transparent 70%);pointer-events:none}
+.eyebrow{color:var(--sky);display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--blue)}
+.big{font-family:var(--f-display);font-weight:400;font-size:clamp(64px,15vw,190px);line-height:.9;letter-spacing:-.01em;margin:18px 0 8px}
+.big small{font-size:.42em;color:var(--sky);margin-left:.08em}
+.sub{color:var(--muted-light);font-size:clamp(15px,1.6vw,18px);max-width:640px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chip{border:1px solid var(--line-dark);background:rgba(255,255,255,.04);border-radius:14px;padding:12px 16px;min-width:150px;flex:1 1 150px}
+.chip .k{color:var(--muted-light)}
+.chip .v{font-family:var(--f-display);font-size:30px;line-height:1.1;margin-top:4px}
+.chip .v.up{color:#ffb4b4}.chip .v.down{color:#9ff0b8}
+
+/* secciones */
+section{padding:clamp(44px,6vw,80px) 0}
+.light{background:#fff;color:var(--ink)}
+.sky{background:var(--sky);color:var(--ink)}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(38px,6vw,72px);line-height:.95;text-transform:uppercase;margin:10px 0 26px}
+.light .eyebrow,.sky .eyebrow{color:var(--blue)}
+.lead{color:var(--muted-ink);max-width:680px;margin:-12px 0 28px}
+
+/* saldos */
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{border:1px solid var(--line-light);border-radius:20px;padding:20px;background:#fff;position:relative;overflow:hidden}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .prov{font-weight:600}
+.tag{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 9px;white-space:nowrap}
+.tag.verde{background:#dcfce7;color:#166534}.tag.ambar{background:#fef3c7;color:#92400e}.tag.rojo{background:#fee2e2;color:#991b1b}
+.card .saldo{font-family:var(--f-display);font-size:48px;line-height:1;margin:16px 0 4px}
+.card .saldo.neg{color:var(--bad)}
+.card .meta{color:var(--muted-ink);font-size:14px}
+.bar{height:8px;background:var(--ice);border-radius:99px;margin:14px 0 10px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;transition:width .8s var(--ease)}
+.card a{color:var(--blue);font-size:13px;text-decoration:none;font-weight:600}
+.card a:hover{text-decoration:underline}
+.est{color:var(--muted-ink);font:400 11px var(--f-mono);text-transform:uppercase;letter-spacing:.06em}
+
+/* gráfico */
+.chart{position:relative;border:1px solid var(--line-dark);border-radius:22px;padding:22px 18px 14px;background:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:14px;color:var(--muted-light);font-size:13px}
+.legend span{display:flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px}
+svg text{font-family:var(--f-mono);font-size:10px;fill:rgba(255,255,255,.45)}
+.tip{position:absolute;pointer-events:none;background:#fff;color:var(--ink);border-radius:12px;padding:10px 12px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35);opacity:0;transition:opacity .15s;min-width:170px;z-index:5}
+.tip b{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-ink)}
+.tip div{display:flex;justify-content:space-between;gap:14px}
+
+/* destinos */
+.tabs{display:inline-flex;border:1px solid var(--line-light);border-radius:999px;padding:4px;margin-bottom:22px;background:#fff}
+.tabs button{border:0;background:transparent;font:600 13px var(--f-body);padding:8px 16px;border-radius:999px;cursor:pointer;color:var(--muted-ink)}
+.tabs button.on{background:var(--ink);color:#fff}
+.dest{display:grid;gap:10px}
+.drow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid var(--line-light)}
+.drow .t{font-weight:600;font-size:15px}
+.drow .p{color:var(--muted-ink);font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.drow .e{font-family:var(--f-display);font-size:26px;text-align:right}
+.drow .b{grid-column:1/-1;height:6px;background:var(--ice);border-radius:99px;overflow:hidden}
+.drow .b i{display:block;height:100%;border-radius:99px}
+.pill{font:500 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-light);border-radius:999px;padding:2px 7px}
+
+/* minuto de Vera */
+.min{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(24px,4vw,56px);align-items:center}
+.eurmin{font-family:var(--f-display);font-size:clamp(72px,12vw,150px);line-height:.9;color:var(--blue)}
+.stack{display:flex;height:22px;border-radius:99px;overflow:hidden;margin:6px 0 18px;background:#fff}
+.pieces{display:grid;gap:8px}
+.piece{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:10px 0;border-bottom:1px solid rgba(5,8,19,.1)}
+.piece span{display:flex;gap:9px;align-items:center}
+.piece i{width:10px;height:10px;border-radius:3px;flex:none}
+
+/* tabla llamadas */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;color:var(--muted-light);font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:0 10px 10px;border-bottom:1px solid var(--line-dark)}
+.tbl td{padding:12px 10px;border-bottom:1px solid var(--line-dark)}
+.tbl td.n{text-align:right;font-family:var(--f-mono)}
+.tbl .m{color:var(--muted-light);font-family:var(--f-mono);font-size:12px}
+
+/* notas */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.note{border:1px solid var(--line-light);border-radius:18px;padding:18px;background:#fff}
+.note h3{font-size:15px;margin-bottom:6px}
+.note p{color:var(--muted-ink);font-size:14px}
+
+footer{padding:56px 0 28px;overflow:hidden}
+.giant{font-family:var(--f-display);font-size:clamp(80px,23vw,330px);line-height:.8;letter-spacing:-.01em;color:transparent;-webkit-text-stroke:1px rgba(207,226,255,.35);text-align:center;user-select:none;white-space:nowrap}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted-light);margin-top:20px}
+
+
+/* suscripción aparte y alertas */
+.sub-card{margin-top:14px;border:1px dashed rgba(207,226,255,.35);border-radius:16px;padding:0 18px;background:rgba(207,226,255,.05)}
+.sub-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0}
+.sub-row+.sub-row{border-top:1px dashed rgba(207,226,255,.2)}
+.sub-row>div:first-child{min-width:0}
+.sub-card summary{list-style:none;cursor:pointer}
+.sub-card summary::-webkit-details-marker{display:none}
+.sub-card summary .k::after{content:" ▾";opacity:.6}
+.sub-card details[open] summary .k::after{content:" ▴"}
+.sub-card details[open] summary{border-bottom:1px dashed rgba(207,226,255,.2)}
+.sub-card .sub-row.item .amt{font-size:22px}
+.sub-card:empty{display:none}
+.sub-card .k{color:var(--muted-light)}
+.sub-card b{display:block;margin-top:4px;font-weight:600}
+.sub-card span{color:var(--muted-light);font-size:13px}
+.sub-card .amt{font-family:var(--f-display);font-size:30px;white-space:nowrap;color:var(--sky)}
+.sub-card .amt small{font-size:.5em;margin-left:2px}
+.alerts{display:grid;gap:10px;margin-top:22px}
+.al{display:flex;gap:12px;align-items:flex-start;border-radius:14px;padding:12px 16px;border:1px solid}
+.al i{font-style:normal;line-height:1.4}
+.al b{display:block;font-weight:600;font-size:15px}
+.al span{display:block;font-size:13px;opacity:.85;margin-top:2px}
+.al.rojo{background:rgba(229,72,77,.14);border-color:rgba(229,72,77,.5);color:#ffd4d4}.al.rojo i{color:var(--bad)}
+.al.ambar{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.45);color:#ffe7bd}.al.ambar i{color:var(--warn)}
+.al.verde{background:rgba(22,163,74,.12);border-color:rgba(22,163,74,.4);color:#c9f7d8}.al.verde i{color:var(--ok)}
+/* cuentas */
+.acc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+.acc button{text-align:left;border:1px solid var(--line-light);background:#fff;border-radius:18px;padding:14px 16px;cursor:pointer;font:inherit;color:var(--ink);transition:.2s}
+.acc button span{color:var(--muted-ink);font-size:11px}
+.acc button b{display:block;font-size:17px;margin:4px 0 2px}
+.acc button em{font-style:normal;font-family:var(--f-display);font-size:28px}
+.acc button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.acc button.on span{color:var(--sky)}
+@media (max-width:760px){.sub-card .amt{font-size:24px}}
+
+/* candado */
+#lock{min-height:100vh;display:none;place-items:center;padding:24px}
+#lock .box{max-width:440px;text-align:center}
+#lock h1{font-family:var(--f-display);font-weight:400;font-size:64px;line-height:.95;margin:16px 0 12px}
+#lock p{color:var(--muted-light)}
+#lock form{display:flex;gap:8px;margin-top:22px}
+#lock input{flex:1;min-width:0;background:var(--ink-2);border:1px solid var(--line-dark);border-radius:999px;color:#fff;padding:12px 16px;font:14px var(--f-mono)}
+#lock button{background:var(--blue);border:0;color:#fff;border-radius:999px;padding:12px 18px;font:600 14px var(--f-body);cursor:pointer}
+#lock .err{color:#ffb4b4;margin-top:12px;min-height:20px;font-size:14px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:760px){
+  header .wrap{height:56px}
+  .brand span{display:none}
+  .min{grid-template-columns:1fr}
+  .tbl .hide{display:none}
+  .tbl td,.tbl th{padding-left:6px;padding-right:6px}
+  .chip{min-width:0;flex:1 1 calc(50% - 10px)}
+  .chip .v{font-size:24px}
+  .card .saldo{font-size:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div id="lock">
+  <div class="box">
+    <div class="eyebrow mono" style="justify-content:center">Panel privado</div>
+    <h1>GASTOS CIFRADOS</h1>
+    <p>Ábrelo desde el acceso directo «Gastos Vexelar» del escritorio, o pega aquí la clave del panel. En el móvil se pega una sola vez: después se queda guardada.</p>
+    <form id="kform"><input id="kin" placeholder="clave del panel" autocomplete="off"><button>Abrir</button></form>
+    <div class="err" id="kerr"></div>
+  </div>
+</div>
+
+<div id="app" hidden>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#"><b>VEXELAR</b><span class="mono">/ gastos de APIs</span></a>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="live mono"><i class="dot" id="dot"></i><span id="ago">—</span></div>
+      <button class="btn" id="copiak" title="Copiar la clave para el acceso directo del móvil" hidden>🔑</button>
+      <button class="btn" id="refresh" title="Recargar datos">↻</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow mono" id="mesLabel">Este mes</div>
+    <div class="big" id="total">—</div>
+    <p class="sub" id="totalSub"></p>
+    <div class="chips" id="chips"></div>
+    <div class="sub-card" id="subCard"></div>
+    <div class="alerts" id="alerts"></div>
+  </div>
+</div>
+
+<section class="light">
+  <div class="wrap">
+    <div class="eyebrow mono">Saldos de prepago</div>
+    <h2>¿Cuánto queda?</h2>
+    <p class="lead">Lo que queda en cada cuenta de prepago y cuántos días aguanta al ritmo de las dos últimas semanas. Si un saldo llega a cero, ese servicio deja de funcionar.</p>
+    <div class="grid4" id="saldos"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow mono">Últimos 30 días</div>
+    <h2>Gasto diario</h2>
+    <div class="chart reveal" id="chart">
+      <div class="legend" id="legend"></div>
+      <svg id="svg" width="100%" height="280" preserveAspectRatio="none"></svg>
+      <div class="tip" id="tip"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sky">
+  <div class="wrap">
+    <div class="eyebrow mono">De quién es cada gasto</div>
+    <h2>Tuyo y de cada cliente</h2>
+    <div class="acc" id="acc"></div>
+    <div class="tabs" id="tabs"></div>
+    <div class="dest" id="dest"></div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="wrap min">
+    <div>
+      <div class="eyebrow mono">Coste real de Vera</div>
+      <h2>Un minuto de llamada</h2>
+      <div class="eurmin" id="eurmin">—</div>
+      <p class="lead" style="margin-top:14px" id="minSub"></p>
+    </div>
+    <div>
+      <div class="stack" id="stack"></div>
+      <div class="pieces" id="pieces"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow mono">Retell</div>
+    <h2>Últimas llamadas</h2>
+    <div style="overflow-x:auto">
+      <table class="tbl" id="calls"></table>
+    </div>
+  </div>
+</section>
+
+<section class="light">
+  <div class="wrap">
+    <div class="eyebrow mono">Cómo leerlo</div>
+    <h2>Notas</h2>
+    <div class="notes" id="notes"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="giant">VEXELAR</div>
+    <div class="foot mono"><span id="gen">—</span><span>Datos cifrados · se actualiza cada 15 min</span></div>
+  </div>
+</footer>
+</div>
+
+<script>
+(() => {
+  const KEY_LS = "vx-gastos-k";
+  const COL = {"Retell":"var(--c-retell)","Twilio":"var(--c-twilio)","OpenRouter":"var(--c-or)","Meta (WhatsApp)":"var(--c-meta)"};
+  const PIEZA_COL = {"Modelo (LLM)":"#0570f9","Motor de voz Retell":"#050813","Voz (Cartesia)":"#7fb2ff","Recargo por guion largo":"#f59e0b","Exámenes por chat":"#a78bfa","Telefonía Retell":"#ff6b6b","Otros Retell":"#9aa4b8"};
+  const eur = (v, d = 2) => (v ?? 0).toLocaleString("es-ES", {minimumFractionDigits:d, maximumFractionDigits:d}) + " €";
+  const usd = v => (v ?? 0).toLocaleString("es-ES", {minimumFractionDigits:2, maximumFractionDigits:2}) + " $";
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const nomMes = m => { const [y, n] = m.split("-"); return MESES[+n - 1] + " " + y; };
+  const $ = id => document.getElementById(id);
+  let datos = null, tab = 0;
+
+  // ---- clave ----
+  function leerClave() {
+    const m = location.hash.match(/k=([A-Za-z0-9_-]+)/);
+    if (m) {
+      try { localStorage.setItem(KEY_LS, m[1]); } catch (e) {}
+      history.replaceState(null, "", location.pathname + location.search);
+      return m[1];
+    }
+    try { return localStorage.getItem(KEY_LS); } catch (e) { return null; }
+  }
+  const b64 = s => Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)), c => c.charCodeAt(0));
+  async function descifrar(k, sobre) {
+    const key = await crypto.subtle.importKey("raw", b64(k), "AES-GCM", false, ["decrypt"]);
+    const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(sobre.iv)}, key, b64(sobre.ct));
+    return JSON.parse(new TextDecoder().decode(pt));
+  }
+  async function cargar(k) {
+    const r = await fetch("data.json?t=" + Date.now(), {cache:"no-store"});
+    if (!r.ok) throw new Error("No hay datos publicados (" + r.status + ")");
+    return descifrar(k, await r.json());
+  }
+  function candado(msg) {
+    $("app").hidden = true; $("lock").style.display = "grid"; $("kerr").textContent = msg || "";
+  }
+  async function arrancar(k) {
+    try {
+      datos = await cargar(k);
+      $("lock").style.display = "none"; $("app").hidden = false;
+      pintar();
+    } catch (e) {
+      candado(e.name === "OperationError" ? "La clave no abre estos datos." : String(e.message || e));
+    }
+  }
+  $("kform").addEventListener("submit", e => {
+    e.preventDefault();
+    const k = $("kin").value.trim().replace(/^.*k=/, "");
+    try { localStorage.setItem(KEY_LS, k); } catch (er) {}
+    arrancar(k);
+  });
+  // En el navegador (no en el icono de la pantalla de inicio) se ofrece copiar la clave: el icono del móvil
+  // guarda sus datos aparte y abre sin el #k=, así que ahí se pega una vez y se queda.
+  const instalada = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  if (!instalada) $("copiak").hidden = false;
+  $("copiak").addEventListener("click", async () => {
+    let k = null; try { k = localStorage.getItem(KEY_LS); } catch (e) {}
+    if (!k) return;
+    try { await navigator.clipboard.writeText(k); $("copiak").textContent = "✓ copiada"; }
+    catch (e) { prompt("Copia la clave:", k); }
+  });
+  $("refresh").addEventListener("click", () => { const k = leerClave(); if (k) arrancar(k); });
+
+  // ---- pintar ----
+  function hace() {
+    if (!datos) return;
+    const min = Math.round((Date.now() - new Date(datos.generado).getTime()) / 60000);
+    $("ago").textContent = min < 1 ? "ahora" : min < 60 ? `hace ${min} min` : `hace ${Math.floor(min / 60)} h ${min % 60} min`;
+    $("dot").classList.toggle("viejo", min > 45);
+  }
+  // Créditos de ElevenLabs (1 crédito ≈ 1 carácter de voz): no es dinero, es la cuota del plan del mes.
+  function creditosEleven(c) {
+    if (!c) return "";
+    const n = v => Math.round(v).toLocaleString("es-ES", {useGrouping: "always"});
+    const pctRest = c.limite ? c.restantes / c.limite * 100 : 0;
+    const nivel = pctRest < 10 ? "rojo" : pctRest < 30 ? "ambar" : "verde";
+    const col = {rojo:"var(--bad)", ambar:"var(--warn)", verde:"var(--ok)"}[nivel];
+    const txt = {rojo:"Casi agotados", ambar:"Ojo", verde:"Bien"}[nivel];
+    const renueva = c.renueva ? c.renueva.split("-").reverse().slice(0, 2).join("/") : "?";
+    return `<div class="card reveal">
+      <div class="top"><span class="prov">ElevenLabs (voz)</span><span class="tag ${nivel}">${txt}</span></div>
+      <div class="saldo">${n(c.restantes)}</div>
+      <div class="meta">créditos de ${n(c.limite)} · hoy ${n(c.hoy)}</div>
+      <div class="bar"><i style="width:${Math.max(2, pctRest)}%;background:${col}"></i></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <span class="meta" style="font-size:13px">se renuevan el ${renueva}</span><span class="est">real</span>
+      </div></div>`;
+  }
+  function pintar() {
+    const d = datos;
+    const vm = d.api_mes_eur, va = d.api_mes_anterior_eur;
+    const fijo = d.fijo_mes || 0, total = d.total_mes_eur ?? (vm + fijo);
+    $("mesLabel").textContent = "Gasto total · " + nomMes(d.mes);
+    const [ent, dec] = total.toFixed(2).split(".");
+    $("total").innerHTML = `${Number(ent).toLocaleString("es-ES")}<small>,${dec} €</small>`;
+    $("totalSub").textContent = `${eur(vm)} en APIs hasta hoy + ${eur(fijo)} de suscripciones al mes. Previsión a fin de mes: ${eur(d.proyeccion_variable_mes + fijo)}.`.replace(/ €/g, " €");
+    const cu = d.cuentas || {}, deMes = c => (cu[c] && cu[c][d.mes]) ? cu[c][d.mes].total : 0;
+    const clientes = Object.keys(cu).filter(c => c !== "Vexelar" && c !== "Sin desglose");
+    const proy = d.proyeccion_variable_mes;
+    $("chips").innerHTML = [
+      ["Tuyo (Vexelar)", eur(deMes("Vexelar"))],
+      ["Clientes", eur(clientes.reduce((a, c) => a + deMes(c), 0))],
+      ["Ritmo (7 días)", eur(d.ritmo_dia_eur) + "/día"],
+      ["Previsión APIs", eur(proy), proy > va ? "up" : "down"],
+    ].map(([k, v, c]) => `<div class="chip"><div class="k mono">${k}</div><div class="v ${c || ""}">${v}</div></div>`).join("");
+    // Suscripciones: una fila resumen que se despliega (si no, con 6+ ocupan media pantalla del móvil).
+    const fj = d.fijos || [];
+    const tipo = f => f.hasta ? `Dada de baja · hasta el ${f.hasta.split("-").reverse().slice(0, 2).join("/")}`
+      : f.cadencia === "anual" ? `Anual · ${eur(f.importe)} al año` : "Mensual" + (f.real ? " · en vivo" : "");
+    $("subCard").innerHTML = fj.length ? `<details><summary class="sub-row"><div><div class="k mono">Suscripciones · ${fj.length}</div><b>Herramientas de pago fijo</b><span>Las anuales, repartidas entre 12 meses</span></div><div class="amt">${eur(fijo)}<small>/mes</small></div></summary>`
+      + fj.map(f => `<div class="sub-row item"><div><div class="k mono">${tipo(f)}${f.estimado ? " · estimado" : ""}</div><b>${esc(f.nombre)}</b><span>${esc(f.destino)}</span></div><div class="amt">${eur(f.eur_mes)}<small>/mes</small></div></div>`).join("") + `</details>` : "";
+    const ICO = {rojo:"●", ambar:"●", verde:"●"};
+    $("alerts").innerHTML = (d.alertas || []).map(a => `<div class="al ${a.nivel}"><i>${ICO[a.nivel]}</i><div><b>${esc(a.texto)}</b><span>${esc(a.accion)}</span></div></div>`).join("");
+
+    // saldos
+    $("saldos").innerHTML = d.saldos.map(s => {
+      const dias = s.verificado_sin_saldo ? "sin saldo · comprobado ahora" : s.con_saldo_sin_importe ? "con saldo (comprobado); el importe no lo da la API"
+        : s.dias == null ? "sin ritmo medible" : s.saldo_usd <= 0 ? "agotado" : `${s.dias.toLocaleString("es-ES")} días al ritmo actual`;
+      const pct = s.dias == null ? 100 : Math.max(2, Math.min(100, s.dias / 30 * 100));
+      const col = s.nivel === "rojo" ? "var(--bad)" : s.nivel === "ambar" ? "var(--warn)" : "var(--ok)";
+      const txt = {rojo:"Recargar ya", ambar:"Pronto", verde:"Bien"}[s.nivel];
+      const link = s.recargar.split(" ")[0];
+      return `<div class="card reveal">
+        <div class="top"><span class="prov">${esc(s.proveedor)}</span><span class="tag ${s.nivel}">${txt}</span></div>
+        <div class="saldo ${s.saldo_usd != null && s.saldo_usd <= 0 ? "neg" : ""}">${s.verificado_sin_saldo ? "0 $" : s.saldo_usd == null ? "OK" : usd(s.saldo_usd)}</div>
+        <div class="meta">${dias} · ${s.ritmo_usd_dia != null ? usd(s.ritmo_usd_dia) + "/día" : "—"}</div>
+        <div class="bar"><i style="width:${pct}%;background:${col}"></i></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <a href="https://${esc(link)}" target="_blank" rel="noopener">Recargar →</a>
+          ${s.verificado_sin_saldo || s.con_saldo_sin_importe ? '<span class="est">comprobado en vivo</span>' : s.estimado ? '<span class="est" title="El proveedor no da el saldo por API: se calcula con las recargas registradas en finanzas menos el gasto medido">estimado</span>' : '<span class="est">real</span>'}
+        </div></div>`;
+    }).join("") + creditosEleven(d.elevenlabs);
+
+    grafico();
+    destinos();
+
+    // minuto de Vera
+    $("eurmin").textContent = d.retell_eur_min != null ? d.retell_eur_min.toLocaleString("es-ES", {minimumFractionDigits:2, maximumFractionDigits:3}) + " €" : "—";
+    $("minSub").textContent = `Coste medio por minuto de llamada este mes (${d.retell_minutos_mes.toLocaleString("es-ES")} min), sin contar la línea de Twilio. Así se reparte cada minuto`;
+    const examenes = d.retell_piezas_mes["Exámenes por chat"] || 0;
+    const piezas = Object.entries(d.retell_piezas_mes).filter(([k]) => k !== "Exámenes por chat").sort((a, b) => b[1] - a[1]);
+    const sum = piezas.reduce((a, [, v]) => a + v, 0) || 1;
+    $("minSub").textContent += examenes ? ` (aparte quedan ${eur(examenes)} de exámenes por chat, que no son llamadas):` : ":";
+    $("stack").innerHTML = piezas.map(([k, v]) => `<i style="width:${v / sum * 100}%;background:${PIEZA_COL[k] || "#9aa4b8"}" title="${esc(k)}"></i>`).join("");
+    $("pieces").innerHTML = piezas.map(([k, v]) => `<div class="piece"><span><i style="background:${PIEZA_COL[k] || "#9aa4b8"}"></i>${esc(k)}</span><b>${eur(v)} · ${Math.round(v / sum * 100)} %</b></div>`).join("") || '<p class="lead">Sin llamadas este mes.</p>';
+
+    // llamadas
+    $("calls").innerHTML = `<tr><th>Cuándo</th><th>Agente</th><th class="hide">Modelo</th><th class="n">Duración</th><th class="n">Coste</th></tr>` +
+      d.recientes.map(c => {
+        const f = new Date(c.ts);
+        const fecha = f.toLocaleDateString("es-ES", {day:"numeric", month:"short"}) + " " + f.toLocaleTimeString("es-ES", {hour:"2-digit", minute:"2-digit"});
+        const dur = `${Math.floor(c.seg / 60)}:${String(c.seg % 60).padStart(2, "0")}`;
+        return `<tr><td class="m">${fecha}</td><td>${esc(c.agente)}</td><td class="m hide">${esc(c.modelo || "—")}</td><td class="n">${dur}</td><td class="n">${usd(c.usd)}</td></tr>`;
+      }).join("");
+
+    // notas
+    $("notes").innerHTML = [
+      ["Vera en producción", "Las llamadas de Vera las cobra Retell por minuto, con el modelo incluido. No pasan por OpenRouter ni por la suscripción de Claude, sea cual sea el modelo."],
+      ["OpenRouter", "Una sola cuenta con dos claves: la de Kathy, que usa su bot, y la general, que usan los exámenes y el sistema. El gasto de cada clave es real, porque lo da OpenRouter. El saldo es de la cuenta entera: si se agota, se para el bot de Kathy."],
+      ["Claude Max", "Va aparte del gasto en APIs: es una cuota fija mensual. Claude Code, los agentes y los exámenes con Claude van por la suscripción y no suman nada más."],
+      ["Saldos estimados", "Retell y Kapso no dan el saldo por API. Se calcula con las recargas registradas en finanzas menos el gasto medido. Si recargas, registra la recarga para que cuadre."],
+      ["Tipo de cambio", `Los dólares se pasan a euros a ${d.usd_eur.toLocaleString("es-ES")} €/$. Los saldos se muestran en dólares, que es como los cobra cada proveedor.`],
+    ].map(([h, p]) => `<div class="note reveal"><h3>${h}</h3><p>${p}</p></div>`).join("");
+
+    $("gen").textContent = "Datos de " + new Date(d.generado).toLocaleString("es-ES", {dateStyle:"medium", timeStyle:"short"});
+    hace();
+    observar();
+  }
+
+  function grafico() {
+    const d = datos, svg = $("svg"), provs = Object.keys(COL);
+    $("legend").innerHTML = provs.map(p => `<span><i style="background:${COL[p]}"></i>${p}</span>`).join("");
+    const W = svg.clientWidth || 800, H = 280, pb = 24, pt = 8, pl = 44;
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const tot = d.serie.map(x => provs.reduce((a, p) => a + (x[p] || 0), 0));
+    let max = Math.max(0.5, ...tot);
+    const paso = max > 4 ? 2 : max > 2 ? 1 : max > 1 ? 0.5 : 0.25;
+    max = Math.ceil(max / paso) * paso;
+    const n = d.serie.length, bw = (W - pl) / n, y = v => H - pb - (v / max) * (H - pb - pt);
+    let s = "";
+    for (let v = 0; v <= max + 1e-9; v += paso) s += `<line x1="${pl}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.08)"/><text x="${pl - 6}" y="${y(v) + 3}" text-anchor="end">${v.toLocaleString("es-ES")}€</text>`;
+    d.serie.forEach((x, i) => {
+      let acc = 0;
+      const x0 = pl + i * bw + bw * .18, w = bw * .64;
+      provs.forEach(p => {
+        const v = x[p] || 0; if (!v) return;
+        s += `<rect x="${x0}" y="${y(acc + v)}" width="${w}" height="${Math.max(0, y(acc) - y(acc + v))}" fill="${COL[p]}" rx="2"/>`;
+        acc += v;
+      });
+      const cada = W < 520 ? 7 : 5;
+      if ((i % cada === 0 && n - 1 - i >= cada / 2) || i === n - 1) {
+        const f = new Date(x.dia + "T12:00");
+        s += `<text x="${x0 + w / 2}" y="${H - 6}" text-anchor="middle">${f.getDate()}/${f.getMonth() + 1}</text>`;
+      }
+      s += `<rect data-i="${i}" x="${pl + i * bw}" y="0" width="${bw}" height="${H - pb}" fill="transparent"/>`;
+    });
+    svg.innerHTML = s;
+    const tip = $("tip"), box = $("chart");
+    svg.onmousemove = svg.ontouchstart = e => {
+      const t = (e.touches ? e.touches[0] : e).target || e.target;
+      const el = e.touches ? document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY) : e.target;
+      const i = el && el.dataset ? el.dataset.i : undefined;
+      if (i === undefined) { tip.style.opacity = 0; return; }
+      const x = d.serie[i], f = new Date(x.dia + "T12:00");
+      tip.innerHTML = `<b>${f.toLocaleDateString("es-ES", {weekday:"short", day:"numeric", month:"short"})}</b>` +
+        provs.filter(p => x[p]).map(p => `<div><span style="color:${COL[p]}">●</span> ${p}<span>${eur(x[p])}</span></div>`).join("") +
+        `<div style="border-top:1px solid #e3e8f1;margin-top:6px;padding-top:6px"><strong>Total</strong><strong>${eur(tot[i])}</strong></div>`;
+      const r = box.getBoundingClientRect(), er = el.getBoundingClientRect();
+      let left = er.left - r.left + er.width / 2 - 90;
+      left = Math.max(8, Math.min(r.width - 190, left));
+      tip.style.left = left + "px"; tip.style.top = "56px"; tip.style.opacity = 1;
+    };
+    svg.onmouseleave = () => tip.style.opacity = 0;
+  }
+
+  let cuenta = "Vexelar";
+  function destinos() {
+    const d = datos, meses = [d.mes, d.mes_anterior], cu = d.cuentas || {};
+    const orden = ["Vexelar", ...Object.keys(cu).filter(c => c !== "Vexelar" && c !== "Sin desglose").sort(), ...(cu["Sin desglose"] ? ["Sin desglose"] : [])];
+    if (!orden.includes(cuenta)) cuenta = "Vexelar";
+    const totalDe = (c, m) => (cu[c] && cu[c][m]) ? cu[c][m].total : 0;
+    $("acc").innerHTML = orden.map(c => `<button class="${c === cuenta ? "on" : ""}" data-c="${esc(c)}">
+        <span class="mono">${c === "Vexelar" ? "Tuyo · empresa" : c === "Sin desglose" ? "Sin repartir" : "Cliente"}</span>
+        <b>${esc(c)}</b><em>${eur(totalDe(c, d.mes))}</em></button>`).join("");
+    $("acc").querySelectorAll("button").forEach(b => b.onclick = () => { cuenta = b.dataset.c; destinos(); });
+    $("tabs").innerHTML = meses.map((m, i) => `<button class="${i === tab ? "on" : ""}" data-t="${i}">${nomMes(m)} · ${eur(totalDe(cuenta, m))}</button>`).join("");
+    $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { tab = +b.dataset.t; destinos(); });
+    const filas = d.destinos.filter(x => x.mes === meses[tab] && x.cuenta === cuenta).sort((a, b) => b.eur - a.eur);
+    const max = Math.max(0.01, ...filas.map(x => x.eur));
+    const colProv = p => COL[p] || "#9aa4b8";
+    const nota = cuenta === "Sin desglose" ? '<p class="lead" style="margin:0 0 14px">Antes del 16 de octubre OpenRouter solo se medía como cuenta entera. Desde entonces se reparte por clave: la de Kathy y la general.</p>' : "";
+    $("dest").innerHTML = nota + (filas.map(x => `<div class="drow">
+        <div><div class="t">${esc(x.destino)}</div><div class="p"><span style="color:${colProv(x.proveedor)}">●</span>${esc(x.proveedor)}${x.estimado ? ' <span class="pill">estimado</span>' : ""}</div></div>
+        <div class="e">${eur(x.eur)}</div>
+        <div class="b"><i style="width:${x.eur / max * 100}%;background:${colProv(x.proveedor)}"></i></div>
+      </div>`).join("") || '<p class="lead">Sin gasto este mes.</p>');
+  }
+
+  function observar() {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12});
+    document.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
+  }
+
+  let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => datos && grafico(), 150); });
+  setInterval(hace, 30000);
+  setInterval(() => { const k = leerClave(); if (k && !document.hidden) cargar(k).then(x => { datos = x; pintar(); }).catch(() => {}); }, 120000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) { const k = leerClave(); if (k) cargar(k).then(x => { datos = x; pintar(); }).catch(() => {}); } });
+
+  const k = leerClave();
+  if (k) arrancar(k); else candado("");
+})();
+</script>
+</body>
+</html>
