@@ -1,0 +1,87 @@
+/* Sección «Vera» de la app de Vexelar (30-oct-2026). Reutiliza los tokens de :root del panel y las piezas cx-*
+   de la sección Contenido (cabecera, héroe, chips, barra inferior, pills); aquí solo lo propio de Vera. */
+#vVera{min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.vr-nav{grid-template-columns:repeat(3,1fr)}
+.vr-ago{color:var(--muted-light);font-size:11px}
+@media(max-width:420px){.vr-ago{display:none}}
+
+/* filtros */
+.vr-filtros{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.vr-filtros button{border:1px solid var(--line-dark);background:transparent;color:var(--muted-light);border-radius:999px;padding:8px 14px;font:600 13px var(--f-body);cursor:pointer}
+.vr-filtros button.on{background:#fff;color:var(--ink);border-color:#fff}
+.vr-filtros select{border:1px solid var(--line-dark);background:var(--ink-2);color:#fff;border-radius:999px;padding:8px 12px;font:600 13px var(--f-body);max-width:100%;min-width:0;flex:1 1 180px}
+.vr-cuenta{color:var(--muted-light);font-size:11px;margin:4px 0 6px}
+.vr-dia{color:var(--sky);font-size:11px;margin:18px 0 8px}
+
+/* fila de llamada */
+.vr-call{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--line-dark);border-radius:16px;background:var(--ink-2);margin-bottom:8px;color:#fff;text-decoration:none;transition:border-color .2s}
+.vr-call:hover{border-color:var(--blue-glow)}
+.vr-dir{flex:none;width:52px;text-align:center;font:600 10px var(--f-mono);letter-spacing:.08em;border-radius:10px;padding:8px 0}
+.vr-dir.in{background:rgba(5,112,249,.18);color:var(--sky)}
+.vr-dir.out{background:rgba(255,255,255,.08);color:#fff}
+.vr-dir.web{background:transparent;border:1px dashed var(--line-dark);color:var(--muted-light)}
+.vr-main{display:flex;flex-direction:column;min-width:0;flex:1}
+.vr-main .t{font-weight:600;font-size:15px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vr-main .p{color:var(--muted-light);font-size:12px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vr-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.vr-tags:empty{display:none}
+.vr-side{flex:none;text-align:right;display:flex;flex-direction:column;align-items:flex-end}
+.vr-side b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1}
+.vr-side span{color:var(--muted-light);font:500 11px var(--f-mono);margin-top:4px}
+.cx-pill.bad{border-color:rgba(229,72,77,.5);color:#ffb4b4;background:rgba(229,72,77,.12)}
+
+/* detalle */
+.vr-hero{padding-top:18px}
+.vr-back{color:var(--sky);text-decoration:none;font-size:11px;display:inline-block;margin-bottom:14px}
+.vr-h1{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,11vw,84px);line-height:.95;text-transform:uppercase;margin:10px 0 6px;overflow-wrap:anywhere}
+.vr-audio{width:100%;margin-top:18px;height:44px;color-scheme:dark}
+.vr-det{display:grid;gap:14px;padding-bottom:24px}
+@media(min-width:980px){.vr-det{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);grid-template-rows:auto auto 1fr;align-items:start}.vr-det .vr-box:nth-child(2){grid-row:span 3;grid-column:2}}
+.vr-box{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:20px;padding:16px;margin-bottom:14px}
+.vr-det .vr-box{margin-bottom:0}
+.vr-box h3{color:var(--muted-light);font-size:11px;font-weight:500;margin-bottom:12px}
+.vr-res{font-size:15px;line-height:1.5;margin-top:14px}
+.vr-nota{color:var(--muted-light);font-size:10px;margin-top:6px}
+.vr-kvs{margin-top:12px}
+.vr-kv{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line-dark);font-size:14px}
+.vr-kv:last-child{border-bottom:0}
+.vr-kv span{color:var(--muted-light);min-width:0;flex:1 1 auto}
+.vr-kv em{font-style:normal;font:400 11px var(--f-mono);color:rgba(255,255,255,.4);margin-left:4px}
+.vr-kv b{font-weight:600;text-align:right;overflow-wrap:anywhere;flex:none;max-width:62%}
+.vr-kv.tot{border-top:1px solid rgba(255,255,255,.3);margin-top:4px}
+.vr-kv.tot span{color:#fff;font-weight:600}
+.vr-mal{color:#ffb4b4}
+.vr-sw{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:8px}
+.vr-stack{display:flex;height:14px;border-radius:99px;overflow:hidden;margin-bottom:10px;background:var(--ink-3)}
+.vr-stack i{display:block;height:100%}
+
+/* transcripción */
+.vr-tx{display:flex;flex-direction:column;gap:8px}
+.vr-b{max-width:86%;padding:10px 13px;border-radius:16px;font-size:15px;line-height:1.45;cursor:default}
+.vr-b[data-t]{cursor:pointer}
+.vr-b .who{display:block;font-size:10px;margin-bottom:3px;opacity:.65}
+.vr-b.vera{align-self:flex-start;background:var(--blue);border-bottom-left-radius:5px}
+.vr-b.user{align-self:flex-end;background:var(--ink-3);border:1px solid var(--line-dark);border-bottom-right-radius:5px}
+.vr-b[data-t]:hover{outline:1px solid var(--blue-glow)}
+.vr-tool{align-self:center;max-width:100%;font-size:10px;color:var(--muted-light);border:1px dashed var(--line-dark);border-radius:10px;padding:5px 9px;overflow-wrap:anywhere;text-transform:none;letter-spacing:.02em}
+.vr-tool.res{opacity:.7}
+
+/* agentes */
+.vr-linea{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;border:1px solid rgba(5,112,249,.45);background:rgba(5,112,249,.1);border-radius:18px;padding:14px 16px;margin-bottom:14px}
+.vr-linea span{display:block;color:var(--sky);font-size:10px}
+.vr-linea b{font-size:15px}
+.vr-ag{border:1px solid var(--line-dark);border-radius:18px;background:var(--ink-2);margin-bottom:10px}
+.vr-ag summary{display:flex;gap:12px;align-items:center;padding:14px;cursor:pointer;list-style:none}
+.vr-ag summary::-webkit-details-marker{display:none}
+.vr-ag[open] summary{border-bottom:1px solid var(--line-dark)}
+.vr-agin{padding:6px 16px 16px}
+.vr-agin h3{color:var(--sky);font-size:10px;font-weight:500;margin:16px 0 4px}
+.vr-oir{margin-top:10px}
+.vr-kw{font-weight:400;font-size:12px;color:var(--muted-light)}
+.vr-sub{color:var(--muted-light);font-size:11px;margin:24px 0 10px}
+
+/* números */
+.vr-bars{display:grid;grid-template-columns:repeat(30,1fr);gap:3px;height:120px;align-items:end}
+.vr-bars div{height:100%;display:flex;align-items:flex-end}
+.vr-bars i{display:block;width:100%;min-height:2px;background:var(--blue);border-radius:3px 3px 0 0}
+.vr-ejes{display:flex;justify-content:space-between;color:var(--muted-light);font-size:10px;margin-top:6px}
