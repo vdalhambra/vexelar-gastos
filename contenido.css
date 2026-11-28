@@ -1,0 +1,92 @@
+/* Sección «Contenido» de la app de Vexelar (29-oct-2026). Usa los tokens de :root del panel de gastos. */
+#vContenido{min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.cx-top{position:sticky;top:0;z-index:20;background:rgba(5,8,19,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-dark)}
+.cx-top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
+.cx-hero{position:relative;padding:28px 0 22px;overflow:hidden}
+.cx-hero::before{content:"";position:absolute;inset:-60% -30% auto auto;width:90vw;height:90vw;max-width:700px;max-height:700px;background:radial-gradient(closest-side,rgba(5,112,249,.32),transparent 70%);pointer-events:none}
+.cx-big{font-family:var(--f-display);font-size:clamp(56px,16vw,120px);line-height:.9;margin:12px 0 4px}
+.cx-big small{font-size:.36em;color:var(--sky);margin-left:.12em}
+.cx-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+@media(min-width:720px){.cx-chips{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.cx-chip{border:1px solid var(--line-dark);background:rgba(255,255,255,.04);border-radius:14px;padding:10px 12px}
+.cx-chip .k{color:var(--muted-light);font:500 10px var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
+.cx-chip .v{font-family:var(--f-display);font-size:26px;line-height:1.1;margin-top:3px}
+
+.cx-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(5,8,19,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line-dark);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.cx-nav button{border:0;background:transparent;color:var(--muted-light);font:600 11px var(--f-body);display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;border-radius:12px;cursor:pointer;position:relative}
+.cx-nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.cx-nav button.on{color:#fff}
+.cx-nav button.on svg{stroke:var(--blue-glow)}
+.cx-nav .n{position:absolute;top:2px;right:calc(50% - 22px);background:var(--blue);color:#fff;font:700 10px var(--f-mono);border-radius:99px;padding:1px 5px;min-width:16px}
+
+.cx-sec{padding:8px 0 24px}
+.cx-h{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,9vw,56px);line-height:.95;text-transform:uppercase;margin:18px 0 6px}
+.cx-lead{color:var(--muted-light);font-size:14px;margin-bottom:16px;max-width:640px}
+.cx-empty{border:1px dashed var(--line-dark);border-radius:18px;padding:22px;color:var(--muted-light);text-align:center;font-size:14px}
+
+/* tarjeta de pieza */
+.cx-card{background:var(--ink-2);border:1px solid var(--line-dark);border-radius:22px;overflow:hidden;margin-bottom:18px}
+.cx-media{background:#000;position:relative}
+.cx-media video{display:block;width:100%;max-height:72vh;aspect-ratio:9/16;object-fit:contain;background:#000}
+.cx-car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cx-car::-webkit-scrollbar{display:none}
+.cx-car img{flex:0 0 100%;width:100%;scroll-snap-align:center;aspect-ratio:4/5;object-fit:cover;display:block}
+.cx-cnt{position:absolute;top:10px;right:10px;background:rgba(5,8,19,.7);border-radius:99px;padding:4px 9px;font:500 11px var(--f-mono)}
+.cx-body{padding:16px}
+.cx-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.cx-pill{font:500 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-dark);border-radius:999px;padding:3px 8px;color:var(--muted-light)}
+.cx-pill.azul{border-color:var(--blue);color:var(--sky)}
+.cx-pill.ok{border-color:var(--ok);color:#9ff0b8}
+.cx-pill.warn{border-color:var(--warn);color:#fde68a}
+.cx-title{font-weight:700;font-size:18px;line-height:1.25}
+.cx-box{margin-top:14px;border-top:1px solid var(--line-dark);padding-top:12px}
+.cx-box > summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--sky);font:600 13px var(--f-body)}
+.cx-box > summary::-webkit-details-marker{display:none}
+.cx-box > summary::after{content:"+";font:400 20px var(--f-mono);color:var(--muted-light)}
+.cx-box[open] > summary::after{content:"–"}
+.cx-box .in{margin-top:10px}
+.cx-lbl{display:block;color:var(--muted-light);font:500 10px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;margin:12px 0 6px}
+.cx-ta,.cx-in{width:100%;background:var(--ink);border:1px solid var(--line-dark);border-radius:14px;color:#fff;padding:12px;font:15px/1.45 var(--f-body);resize:vertical}
+.cx-ta:focus,.cx-in:focus{outline:none;border-color:var(--blue-glow)}
+.cx-ta.cambiado,.cx-in.cambiado{border-color:var(--warn)}
+.cx-lam{border:1px solid var(--line-dark);border-radius:14px;padding:10px;margin-bottom:8px}
+.cx-lam b{font:500 10px var(--f-mono);color:var(--muted-light);letter-spacing:.08em}
+.cx-gancho{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid var(--line-dark);border-radius:14px;margin-bottom:8px;cursor:pointer}
+.cx-gancho input{margin-top:4px;accent-color:var(--blue)}
+.cx-gancho .s{margin-left:auto;font:500 11px var(--f-mono);color:var(--sky);white-space:nowrap}
+.cx-txt{white-space:pre-wrap;font-size:14px;color:#dbe4f5}
+.cx-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.cx-btn{border:1px solid var(--line-dark);background:transparent;color:#fff;border-radius:999px;padding:13px 14px;font:600 14px var(--f-body);cursor:pointer;text-align:center;text-decoration:none}
+.cx-btn.pri{background:var(--blue);border-color:var(--blue);grid-column:1/-1}
+.cx-btn.pri.warn{background:var(--warn);border-color:var(--warn);color:var(--ink)}
+.cx-btn:disabled{opacity:.5}
+.cx-btn.peq{padding:8px 12px;font-size:13px}
+.cx-msg{margin-top:10px;font-size:13px;color:var(--muted-light);min-height:18px}
+.cx-msg.ok{color:#9ff0b8}.cx-msg.err{color:#ffb4b4}
+
+/* filas */
+.cx-row{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--line-dark);border-radius:16px;background:var(--ink-2);margin-bottom:8px}
+.cx-row img{width:52px;height:68px;object-fit:cover;border-radius:10px;flex:none;background:#000}
+.cx-row .t{font-weight:600;font-size:14px;line-height:1.3}
+.cx-row .p{color:var(--muted-light);font-size:12px;margin-top:3px}
+.cx-row .r{margin-left:auto;text-align:right;flex:none}
+.cx-row .r b{font-family:var(--f-display);font-size:24px;display:block;line-height:1}
+.cx-row .r span{font:500 10px var(--f-mono);color:var(--muted-light);text-transform:uppercase}
+.cx-row a{color:inherit;text-decoration:none}
+.cx-bar{height:5px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:6px}
+.cx-bar i{display:block;height:100%;background:var(--blue);border-radius:99px}
+.cx-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:8px}
+.cx-stats div{background:rgba(255,255,255,.04);border-radius:10px;padding:6px;text-align:center}
+.cx-stats b{display:block;font-family:var(--f-display);font-size:18px;line-height:1.1}
+.cx-stats span{font:500 9px var(--f-mono);color:var(--muted-light);text-transform:uppercase;letter-spacing:.04em}
+
+.cx-form{display:grid;gap:8px;background:var(--ink-2);border:1px solid var(--line-dark);border-radius:20px;padding:14px;margin-bottom:18px}
+.cx-pat{border:1px solid var(--line-dark);border-radius:16px;padding:12px;margin-bottom:8px;background:var(--ink-2)}
+.cx-pat .t{font-weight:600;font-size:14px}
+.cx-pat .v{display:flex;gap:10px;margin-top:6px;font:500 12px var(--f-mono);color:var(--muted-light)}
+.cx-pat .v b{color:#fff}
+.cx-pat p{color:#dbe4f5;font-size:13px;margin-top:6px}
+.cx-ap{border-left:2px solid var(--blue);padding:4px 0 4px 12px;margin-bottom:12px;font-size:14px;color:#dbe4f5}
+.cx-ap b{display:block;font:500 10px var(--f-mono);color:var(--sky);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.cx-x{border:0;background:transparent;color:var(--muted-light);font-size:18px;cursor:pointer;padding:4px 8px}
+@media(min-width:900px){.cx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.cx-grid .cx-card{margin:0}}
